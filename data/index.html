@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:,">
+    <title>ESP32 System Configurator</title>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <span class="logo">ESP32 S3 CoreIOT</span>
+            <span class="status AP_SSID">Mode: Initialization</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="config-card">
+            <h1>System Configuration</h1>
+            <div class="form-group">
+                <label>WiFi SSID</label>
+                <input type="text" id="cfg_ssid">
+            </div>
+            <div class="form-group">
+                <label>WiFi Password</label>
+                <input type="password" id="cfg_pass">
+            </div>
+            <div class="form-group">
+                <label>MQTT Server</label>
+                <input type="text" id="cfg_server" value="mqtt.coreiot.io">
+            </div>
+            <div class="form-group">
+                <label>MQTT Username</label>
+                <input type="text" id="cfg_user">
+            </div>
+            <div class="form-group">
+                <label>MQTT Token/Key</label>
+                <input type="password" id="cfg_token">
+            </div>
+            <button class="btn btn-save" onclick="submitConfig()">SAVE & REBOOT</button>
+        </section>
+
+        <section class="device-control">
+            <div class="control-card">
+                <h2>Local Override (LED 4)</h2>
+                <div class="actions">
+                    <button class="btn btn-card btn-on" onclick="sendAction(1, 'on')">ON</button>
+                    <button class="btn btn-card btn-off" onclick="sendAction(1, 'off')">OFF</button>
+                </div>
+            </div>
+            <div class="control-card">
+                <h2>Local Override (LED 5)</h2>
+                <div class="actions">
+                    <button class="btn btn-card btn-on" onclick="sendAction(2, 'on')">ON</button>
+                    <button class="btn btn-card btn-off" onclick="sendAction(2, 'off')">OFF</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
