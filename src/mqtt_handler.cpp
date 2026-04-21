@@ -10,6 +10,8 @@ String m_server;
 String m_user;
 String m_token;
 
+// Callback function for handling incoming MQTT messages (RPC requests).
+// Processes device control and state queries, and sends responses.
 void mqttCallback(char* topic, byte* payload, unsigned int length) {
     String msg;
     for (unsigned int i = 0; i < length; i++) {
@@ -47,6 +49,8 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
     }
 }
 
+// Initializes the MQTT client with server, user, and token credentials.
+// Sets up the MQTT server and callback function.
 void initMQTT(String server, String user, String token) {
     m_server = server;
     m_user = user;
@@ -57,6 +61,8 @@ void initMQTT(String server, String user, String token) {
     mqttClient.setCallback(mqttCallback);
 }
 
+// Attempts to connect to the MQTT broker and subscribes to RPC request topics.
+// Returns true if connection is successful, false otherwise.
 bool connectMQTT() {
     String clientId = "ESP32CoreIOT-" + String(random(0xffff), HEX);
     
@@ -67,6 +73,8 @@ bool connectMQTT() {
     return false;
 }
 
+// Task function to maintain MQTT connection, publish telemetry data (temperature and humidity),
+// and handle reconnection if disconnected.
 void mqttTask(void *pvParameters) {
     while(1) {
         if (!mqttClient.connected()) {

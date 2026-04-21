@@ -10,11 +10,14 @@
 
 AsyncWebServer server(80);
 
+// Task function to delay and then reboot the ESP32 device.
 void rebootTask(void *pvParameters) {
     vTaskDelay(pdMS_TO_TICKS(1500));
     ESP.restart();
 }
 
+// Initializes the web server, sets up HTTP routes for static files and API endpoints,
+// and starts the server. Handles LED control and configuration updates via API.
 void initWebServer() {
     pinMode(LED1_PIN, OUTPUT);
     pinMode(LED2_PIN, OUTPUT);

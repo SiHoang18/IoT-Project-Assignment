@@ -1,3 +1,4 @@
+// This file includes the DHT anomaly model header for TinyML inference.
 #include "dht_anormaly_model.h"
 
 const unsigned char dht_anomaly_model_tflite[] = {

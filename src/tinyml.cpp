@@ -17,6 +17,7 @@ TfLiteTensor* output = nullptr;
 constexpr int kTensorArenaSize = 8 * 1024;
 uint8_t tensor_arena[kTensorArenaSize];
 
+// Initializes the TinyML model, sets up the interpreter, and starts the inference task.
 void initTinyML() {
     static tflite::MicroErrorReporter micro_error_reporter;
     error_reporter = &micro_error_reporter;
@@ -41,6 +42,8 @@ void initTinyML() {
     xTaskCreate(inferenceTask, "TinyML_Task", 4096, NULL, 1, NULL);
 }
 
+// Task function to perform periodic inference using the TinyML model on temperature and humidity data.
+// Prints prediction results and inference time to the serial monitor.
 void inferenceTask(void *pvParameters) {
     while (1) {
         float currentTemp = 0.0;

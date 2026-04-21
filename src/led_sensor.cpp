@@ -1,11 +1,13 @@
 #include "led_sensor.h"
 
+// Initializes the LED GPIO pin and starts the LED control task.
 void initLED() {
   pinMode(LED_GPIO, OUTPUT);
   digitalWrite(LED_GPIO, LOW);
   xTaskCreate(ledTask, "LED Task", 2048, NULL, 1, NULL);
 }
 
+// Task function to control the LED blinking rate based on the current temperature value.
 void ledTask(void *pvParameters) {
     int blinkDelay = 1000;
     while (true) {

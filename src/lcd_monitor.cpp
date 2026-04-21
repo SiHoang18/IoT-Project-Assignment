@@ -8,6 +8,7 @@ SemaphoreHandle_t stateNormalSem;
 SemaphoreHandle_t stateWarningSem;
 SemaphoreHandle_t stateCriticalSem;
 
+// Initializes the LCD display and DHT20 sensor, creates state semaphores, and starts sensor and LCD tasks.
 void initLCD() {
     lcd.begin();
     lcd.backlight();
@@ -23,6 +24,8 @@ void initLCD() {
     }
 }
 
+// Task function to periodically read temperature and humidity from the DHT20 sensor,
+// update global variables, and set the appropriate state semaphore based on thresholds.
 void sensorTask(void *pvParameters) {
     while (1) {
         dht20.read();
@@ -47,6 +50,8 @@ void sensorTask(void *pvParameters) {
     }
 }
 
+// Task function to update the LCD display based on the current state (normal, warning, critical)
+// and display temperature and humidity values.
 void lcdTask(void *pvParameters) {
     while (1) {
         float currentTemp = 0.0;
